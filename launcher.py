@@ -3,6 +3,7 @@ PID_INDEX = 2
 TITLE_INDEX = 4
 
 import subprocess
+import sys
 import time
 import shlex
 
@@ -118,6 +119,7 @@ def launch_and_get_wid(prog_array, get_wid):
     """
     old  = get_wids()
     proc = subprocess.Popen(prog_array)
+    print("Launching process", proc.pid, file=sys.stderr)
     return get_wid(old, proc.pid)
 
 def launch_and_move(prog_array, workspace,
