@@ -120,7 +120,8 @@ def launch_and_get_wid(prog_array, get_wid):
     proc = subprocess.Popen(prog_array)
     return get_wid(old, proc.pid)
 
-def launch_and_move(prog_array, workspace, get_wid, new_name=None):
+def launch_and_move(prog_array, workspace,
+                    get_wid=get_wid_by_pid, new_name=None):
     """Launch an application and move the window it creates into workspace.
 
     `prog_array` : list forwarded to subprocess.Popen. This should
@@ -135,6 +136,7 @@ def launch_and_move(prog_array, workspace, get_wid, new_name=None):
     `get_wid`    : Function that returns the window id, takes 2 args:
       * old: iterable with windows opened before our program
       * pid: pid of the new process (not necessarly to be used)
+                   Default get_wid_by_pid
 
     `new_name`   : string (default None). If specified, title of the
                    created window will be changed to `new_name`.
