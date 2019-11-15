@@ -124,7 +124,9 @@ def launch_and_get_wid(prog_array, get_wid):
 
 def launch_and_move(prog_array, workspace,
                     get_wid=get_wid_by_pid, new_name=None):
-    """Launch an application and move the window it creates into workspace.
+    """Launch application and move the created window to `workspace`.
+
+    Returns the window id as used by wmcrtl.
 
     `prog_array` : list forwarded to subprocess.Popen. This should
                    include the command used to lauch the application
@@ -152,6 +154,7 @@ def launch_and_move(prog_array, workspace,
     if new_name is not None:
         rename_window(wid, new_name)
     move_win_to_ws(wid, workspace)
+    return wid
 
 def terminal(workspace, directory=None,
              command=None, options=[],
@@ -187,7 +190,7 @@ def terminal(workspace, directory=None,
     if "Terminal" in new_win_name.split()[0]:
         raise ValueError("The new name for terminal can't start with anything containing Terminal")
 
-    launch_and_move(prog_array, workspace, get_wid, new_win_name)
+    return launch_and_move(prog_array, workspace, get_wid, new_win_name)
 
 def firefox(workspace, url=None, new_win_name="Firefox"):
     """Launch new window of firefox and moves it to `workspace`
@@ -208,11 +211,13 @@ def firefox(workspace, url=None, new_win_name="Firefox"):
     if url is not None:
         prog_array.append(url)
     get_wid = lambda old, pid: get_wid_by_title(old, "Mozilla")
-    launch_and_move(prog_array, workspace, get_wid, new_win_name)
+    return launch_and_move(prog_array, workspace, get_wid, new_win_name)
     
 def jupyter_lab(workspace, directory, win_names_pref, port=8890):
     """Open Jupyter server terminal and Jupyter lab in a new firefox
     window and move both windows to `workspace`.
+
+    Return wid of firefox window.
 
     `workspace` : id of workspace in wmctrl where to move the window.
     The workspaces are indexed from 0 in wmctlr while they are
@@ -238,7 +243,7 @@ def jupyter_lab(workspace, directory, win_names_pref, port=8890):
     time.sleep(0.2)
 
     # run firefox
-    firefox(workspace, url, firefox_win_name)
+    return firefox(workspace, url, firefox_win_name)
 
 def texstudio(workspace, file=None):
     """Open new instance of TeXStudio and move the window to
@@ -254,6 +259,6 @@ def texstudio(workspace, file=None):
     prog_array = ["texstudio","--start-always"]
     if file is not None:
         prog_array.append(file)
-    launch_and_move(prog_array, workspace, get_wid)
+    return launch_and_move(prog_array, workspace, get_wid)
 
 #texstudio(4)
