@@ -236,14 +236,15 @@ def jupyter_lab(workspace, directory, win_names_pref, port=8890):
     firefox_win_name  = f"{win_names_pref}-JL-Firefox"
 
     # Run the Jupyter server
-    terminal(workspace, directory, terminal_cmd,
+    term_wid = terminal(workspace, directory, terminal_cmd,
              new_win_name=terminal_win_name, profile="Jupyter")
 
     # Let's give Jupyter some time to start
     time.sleep(0.2)
 
     # run firefox
-    return firefox(workspace, url, firefox_win_name)
+    firefox_wid = firefox(workspace, url, firefox_win_name)
+    return (firefox_wid, term_wid)
 
 def texstudio(workspace, file=None):
     """Open new instance of TeXStudio and move the window to
