@@ -2,12 +2,6 @@ import subprocess
 from launcher import get_window_args
 import sys
 
-### My personal monitor names ###
-LAP  = "eDP-1"
-SIDE = "DP-1"
-BIG  = "DP-3"
-#################################
-
 def parse_displays():
     """Parse the output of `xrandr` and extract info about displays.
     
@@ -101,13 +95,3 @@ def move_win_to_display(wid, display_name, position="full"):
     print(mvargs)
     args = get_window_args(wid) + ["-e", mvargs]
     subprocess.run(args)
-        
-    
-# disp = get_displays()
-# print(get_primary())
-#print(disp[BIG])
-#print(get_mvarg(disp[get_primary()]))
-#print(get_mvarg(disp[LAP]))
-#print(get_mvarg(disp[SIDE],"full"))
-#print(get_mvarg(disp[LAP],"left"))
-#print(get_mvarg(disp[SIDE],"right"))

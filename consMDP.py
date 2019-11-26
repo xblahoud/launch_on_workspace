@@ -1,8 +1,14 @@
 #!/usr/bin/python3
 
+### My personal monitor names ###
+LAP  = "eDP-1"
+SIDE = "DP-1"
+BIG  = "DP-3"
+#################################
+
 from custom_launchers import terminal, jupyter_lab, texstudio
 from launcher import launch_and_move
-from displays import move_win_to_display, BIG, LAP, SIDE
+from displays import move_win_to_display
 
 port = 8899
 workspace = 3
