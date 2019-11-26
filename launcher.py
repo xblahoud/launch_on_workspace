@@ -22,6 +22,11 @@ def get_wids():
     """
     return {line.split()[0] for line in get_windows()}
 
+def get_window_args(wid):
+    """wmctrl arguments that choose `wid` for further processing.
+    """
+    return ["wmctrl","-i","-r",wid]
+
 def rename_window(wid, new_name):
     """Change the title of the window given by `wid`.
 
@@ -30,7 +35,7 @@ def rename_window(wid, new_name):
     launch the same application, the get_wid_by_title will
     return the first match.
     """
-    subprocess.run(["wmctrl","-i","-r",wid,"-T",new_name])
+    subprocess.run(get_window_args(wid) + ["-T",new_name])
 
 def move_win_to_ws(wid, workspace):
     """Move windows specified by `wid` to `workspace`.
@@ -40,7 +45,7 @@ def move_win_to_ws(wid, workspace):
     The workspaces are indexed from 0 in wmctlr while they are
     indexed from 1 in Gnome!
     """
-    subprocess.run(["wmctrl","-i","-r",wid,"-t",str(workspace)])
+    subprocess.run(get_window_args(wid) + ["-t",str(workspace)])
 
 def get_new_wid(old_wins, pattern, f_index=PID_INDEX, repeat=False):
     """Get wid of a newly opened window which `value` contains `pattern`.

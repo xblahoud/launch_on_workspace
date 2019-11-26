@@ -1,4 +1,5 @@
 import subprocess
+from launcher import get_window_args
 import sys
 
 ### My personal monitor names ###
@@ -57,9 +58,6 @@ def get_mvarg(size_pos, position="full"):
         w = int(w) // 2
         x = int(x) + w
     return f"0,{x},{y},{w},{h}"
-
-def get_window_args(wid):
-    return ["wmctrl","-i","-r",wid]
 
 def add_fullscreen(wid):
     args = get_window_args(wid) + ["-b","add,fullscreen"]
