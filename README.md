@@ -16,7 +16,9 @@ Currently, we have functions for launching:
  * `texstudio`
 All these functions return the IDs of windows they create so they can be further positioned on monitors using the functions from [displays](displays.py).
 
-## Requirements
+## Installation
+
+### Requirements
 * Python 3.6+
 * [wmctrl](http://tripie.sweb.cz/utils/wmctrl/)
 * [xrandr](https://www.x.org/wiki/Projects/XRandR/)
@@ -24,7 +26,11 @@ All these functions return the IDs of windows they create so they can be further
 
 tested with Gnome 3.34.1 on Ubuntu 19.10
 
-## Examples
+```
+python3 -m pip install launch_on_workspace
+```
+
+## Usage examples
 The following command launches a new window of Firefox that opens YouTube on workspace 2 (in wmctrl) which is a workspace 3 in Gnome. It is then moved to display connected to DisplayPort#1 (name "DP-1" in `xrandr`) and switched to fullscreen mode.
 
 ```python
