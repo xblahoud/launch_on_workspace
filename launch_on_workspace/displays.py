@@ -1,5 +1,5 @@
 import subprocess
-from launcher import get_window_args
+from .launcher import get_window_args
 import sys
 
 def parse_displays():

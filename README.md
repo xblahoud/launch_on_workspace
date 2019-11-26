@@ -28,11 +28,13 @@ tested with Gnome 3.34.1 on Ubuntu 19.10
 The following command launches a new window of Firefox that opens YouTube on workspace 2 (in wmctrl) which is a workspace 3 in Gnome. It is then moved to display connected to DisplayPort#1 (name "DP-1" in `xrandr`) and switched to fullscreen mode.
 
 ```python
-wid = launcher.firefox(2, "youtube.com")
-displays.move_win_to_display(wid, "DP-1", "full")
+import launch_on_workspace as low
+
+wid = low.firefox(2, "youtube.com")
+low.move_win_to_display(wid, "DP-1", "full")
 ```
 
 The following command opens a gedit on workspace 4 in Gnome
 ```python
-launch_and_move(['gedit'], 3)
+low.launch_and_move(['gedit'], 3)
 ```

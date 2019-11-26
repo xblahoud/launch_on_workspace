@@ -1,7 +1,7 @@
 import shlex
 import time
 
-from launcher import get_wid_by_pid, get_wid_by_title, launch_and_move, get_wids
+from .launcher import get_wid_by_pid, get_wid_by_title, launch_and_move, get_wids
 
 def terminal(workspace, directory=None,
              command=None, options=[],
