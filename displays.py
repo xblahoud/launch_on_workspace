@@ -58,20 +58,20 @@ def get_mvarg(size_pos, position="full"):
         x = int(x) + w
     return f"0,{x},{y},{w},{h}"
 
-def get_window_args(win_id):
-    return ["wmctrl","-i","-r",win_id]
+def get_window_args(wid):
+    return ["wmctrl","-i","-r",wid]
 
-def add_fullscreen(win_id):
-    args = get_window_args(win_id) + ["-b","add,fullscreen"]
+def add_fullscreen(wid):
+    args = get_window_args(wid) + ["-b","add,fullscreen"]
     subprocess.run(args)
     
-def remove_fullscreen(win_id):
-    args = get_window_args(win_id) + ["-b","remove,fullscreen"]
+def remove_fullscreen(wid):
+    args = get_window_args(wid) + ["-b","remove,fullscreen"]
     subprocess.run(args)
-    args = get_window_args(win_id) + ["-b","remove,maximized_vert,maximized_horz"]
+    args = get_window_args(wid) + ["-b","remove,maximized_vert,maximized_horz"]
     subprocess.run(args)
 
-def move_win_to_display(win_id, display_name, position="full"):
+def move_win_to_display(wid, display_name, position="full"):
     """Move window to given display.
     
     By default, the window is put to fullscreen mode. The placement
@@ -87,9 +87,9 @@ def move_win_to_display(win_id, display_name, position="full"):
         raise ValueError(f"Position has to be one of {allowed}")
         
     if position == "full":
-        add_fullscreen(win_id)
+        add_fullscreen(wid)
     else:
-        remove_fullscreen(win_id)
+        remove_fullscreen(wid)
         
     displays = get_displays()
     if display_name not in displays:
@@ -101,7 +101,7 @@ def move_win_to_display(win_id, display_name, position="full"):
     xrandr_pos = get_displays()[display_name]
     mvargs = get_mvarg(xrandr_pos, position)
     print(mvargs)
-    args = get_window_args(win_id) + ["-e", mvargs]
+    args = get_window_args(wid) + ["-e", mvargs]
     subprocess.run(args)
         
     

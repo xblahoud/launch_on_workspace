@@ -32,7 +32,7 @@ def rename_window(wid, new_name):
     """
     subprocess.run(["wmctrl","-i","-r",wid,"-T",new_name])
 
-def move_win_to_ws(win_id, workspace):
+def move_win_to_ws(wid, workspace):
     """Move windows specified by `wid` to `workspace`.
 
     `workspace` : id of workspace in wmctrl where to move the window
@@ -40,7 +40,7 @@ def move_win_to_ws(win_id, workspace):
     The workspaces are indexed from 0 in wmctlr while they are
     indexed from 1 in Gnome!
     """
-    subprocess.run(["wmctrl","-i","-r",win_id,"-t",str(workspace)])
+    subprocess.run(["wmctrl","-i","-r",wid,"-t",str(workspace)])
 
 def get_new_wid(old_wins, pattern, f_index=PID_INDEX, repeat=False):
     """Get wid of a newly opened window which `value` contains `pattern`.
