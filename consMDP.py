@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-from launcher import *
+from custom_launchers import terminal, jupyter_lab, texstudio
+from launcher import launch_and_move
 from displays import move_win_to_display, BIG, LAP, SIDE
 
 port = 8899
