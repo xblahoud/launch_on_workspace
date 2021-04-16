@@ -1,5 +1,9 @@
 # Changelog for Launch on workspace
 
+## [Unpublished]
+### Fixed
+* Windows without names crashed the scripts
+
 ## [1.1.0]
 
 ### Added

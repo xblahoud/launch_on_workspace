@@ -64,7 +64,7 @@ def get_new_wid(old_wins, pattern, f_index=PID_INDEX, repeat=False):
         for win in wins:
             f = win.split()
             wid = f[0]
-            field = f[f_index]
+            field = f[f_index] if f_index < len(f) else ""
 
             if wid in old_wins: 
                 continue
