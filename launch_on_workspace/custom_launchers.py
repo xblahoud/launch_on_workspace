@@ -48,7 +48,7 @@ def firefox(workspace, url=None, new_win_name="Firefox"):
     indexed from 1 in Gnome!
 
     `url` : url to be opened in the new window.
-    
+
     `new_win_name` : string (default "Firefox")
                      title for the new window
     The window id detection is based on lookup for "mozilla",
@@ -60,7 +60,7 @@ def firefox(workspace, url=None, new_win_name="Firefox"):
         prog_array.append(url)
     get_wid = lambda old, pid: get_wid_by_title(old, "Mozilla")
     return launch_and_move(prog_array, workspace, get_wid, new_win_name)
-    
+
 def jupyter_lab(workspace, directory, win_names_pref, port=8890):
     """Open Jupyter server terminal and Jupyter lab in a new firefox
     window and move both windows to `workspace`.
@@ -125,6 +125,7 @@ def pycharm(workspace, directory="."):
     prog_array = (["pycharm", directory, "nosplash"])
     subprocess.Popen(prog_array)
 
+    time.sleep(0.1)
     java_pids = subprocess.check_output(["pidof","java"], encoding='utf-8')
     java_pids = java_pids.split()
 
