@@ -1,12 +1,12 @@
 # Launch-on-workspace
 Launch applications on a specified workspace in Linux.
 
-The script [launcher](launcher.py) implements several useful functions that can launch (in a scriptable manner) applications on designated workspaces on X in Linux. Relies on [wmctrl](http://tripie.sweb.cz/utils/wmctrl/) to manipulate windows on workspaces.
+The module [launcher](launcher.py) implements several useful functions that can launch (in a scriptable manner) applications on designated workspaces on X in Linux. Relies on [wmctrl](http://tripie.sweb.cz/utils/wmctrl/) to manipulate windows on workspaces.
 
-The scripts [displays](displays.py) moves windows to displays in similar manner. Right now it relies on [xrandr](https://www.x.org/wiki/Projects/XRandR/) to get mapping of displays to workspace coordinates. You can use it even without `xrandr` by supplying the right coordinates for `wmctrl` by yourself.
+The module [displays](displays.py) moves windows to displays in similar manner. Right now it relies on [xrandr](https://www.x.org/wiki/Projects/XRandR/) to get mapping of displays to workspace coordinates. You can use it even without `xrandr` by supplying the right coordinates for `wmctrl` by yourself.
 
-The script [custom_launchers](custom_launchers.py) uses the functionality of [launcher](launcher.py) to provide functions that launch specific programs. They serve as an easy abstraction from some implementation details for non-standard situations. The motivation for these is threefold:
- 1. Some programs need carefull treatment as they (a) use some temporary window at startup and we actually want to move the second one (`texstudio`), or (b) you usually have some other instances running in the system and no new process is created (`firefox`)
+The module [custom_launchers](custom_launchers.py) uses the functionality of [launcher](launcher.py) to provide functions that launch specific programs. They serve as an easy abstraction from some implementation details for non-standard situations. The motivation for these is threefold:
+ 1. Some programs need carefull treatment as they (a) use some temporary window at startup and we actually want to move the second one (`texstudio`), or (b) you usually have some other instances running in the system and no new process is created (`firefox`,`Pycharm`)
  2. It simplifies supplying arguments (`terminal`)
  3. Some applications need 2 or more windows to be moved (`jupyter-lab`)
 Currently, we have functions for launching:
@@ -14,6 +14,7 @@ Currently, we have functions for launching:
  * `firefox`
  * `jupyter_lab`
  * `texstudio`
+ * `pycharm`
 All these functions return the IDs of windows they create so they can be further positioned on monitors using the functions from [displays](displays.py).
 
 ## Installation

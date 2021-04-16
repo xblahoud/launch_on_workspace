@@ -4,7 +4,7 @@ __all__ = [
     "custom_launchers",
 ]
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 import launch_on_workspace.launcher
 import launch_on_workspace.displays
