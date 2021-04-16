@@ -15,6 +15,7 @@ Currently, we have functions for launching:
  * `jupyter_lab`
  * `texstudio`
  * `pycharm`
+
 All these functions return the IDs of windows they create so they can be further positioned on monitors using the functions from [displays](displays.py).
 
 ## Installation
