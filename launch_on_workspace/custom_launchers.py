@@ -1,7 +1,8 @@
 import shlex
+import subprocess
 import time
 
-from .launcher import get_wid_by_pid, get_wid_by_title, launch_and_move, get_wids
+from .launcher import get_wid_by_pid, get_wid_by_title, launch_and_move, get_wids, PID_INDEX, move_win_to_ws, get_windows
 
 def terminal(workspace, directory=None,
              command=None, options=[],
@@ -110,3 +111,42 @@ def texstudio(workspace, file=None):
     return launch_and_move(prog_array, workspace, get_wid)
 
 #texstudio(4)
+
+def pycharm(workspace, directory="."):
+    """Launch new pycharm and moves it to `workspace`
+
+    `workspace`  : id of workspace in wmctrl where to move the window.
+    The workspaces are indexed from 0 in wmctlr while they are
+    indexed from 1 in Gnome!
+
+    `directory` : dir to be opened in the new window.
+    """
+    old_wins = get_wids()
+    prog_array = (["pycharm", directory, "nosplash"])
+    subprocess.Popen(prog_array)
+
+    java_pids = subprocess.check_output(["pidof","java"], encoding='utf-8')
+    java_pids = java_pids.split()
+
+    # Find the correct WID
+    found = False
+    c = 0
+    while not found and c < 100:
+        c += 1
+        wins = get_windows()
+        for win in wins:
+            f = win.split()
+            wid = f[0]
+            field = f[PID_INDEX]
+
+            if wid in old_wins:
+                continue
+
+            for pid in java_pids:
+                if pid in field:
+                    found = True
+
+            time.sleep(0.05)
+
+    move_win_to_ws(wid, workspace)
+    return wid
