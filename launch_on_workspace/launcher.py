@@ -58,7 +58,7 @@ def get_new_wid(old_wins, pattern, f_index=PID_INDEX, repeat=False):
     """
     found = False
     c = 0
-    while not found and c < 1000:
+    while not found and c < 100:
         c += 1
         wins = get_windows()
         for win in wins:
